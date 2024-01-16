@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:uptodo_app/src/globals/providers/introduction_provider.dart';
-
 import '../../../../config/themes/app_colors.dart';
 import '../../../../config/themes/app_styles.dart';
 
