@@ -7,6 +7,8 @@ import 'package:uptodo_app/src/modules/introduction/manage_routine_intro/views/m
 import 'package:uptodo_app/src/modules/introduction/manage_tasks_intro/views/manage_tasks_intro.dart';
 import 'package:uptodo_app/src/modules/introduction/onboarding_intro/views/onboarding_intro.dart';
 import 'package:uptodo_app/src/modules/introduction/organize_tasks_intro/views/organize_tasks_intro.dart';
+import 'package:uptodo_app/src/modules/onboarding/log_in_screen/provider/log_in_screen_provider.dart';
+import 'package:uptodo_app/src/modules/onboarding/log_in_screen/views/log_in_screen.dart';
 
 class RoutePath {
   static final routes = <String, WidgetBuilder>{
@@ -25,5 +27,8 @@ class RoutePath {
     RouteNames.onboardingIntro: (_) => Provider(
         create: (context) => IntroductionProvider(_),
         child: const OnboardingIntro()),
+    RouteNames.logInScreen: (_) => Provider(
+        create: (context) => LogInScreenProvider(context),
+        child: const LogInScreen()),
   };
 }

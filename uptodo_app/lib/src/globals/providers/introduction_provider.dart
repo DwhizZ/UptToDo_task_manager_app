@@ -42,4 +42,7 @@ class IntroductionProvider {
   void getStartedPressed() {
     Navigator.pushNamed(context, RouteNames.onboardingIntro);
 }
+void goToLogInScreen(){
+  Navigator.pushNamed(context, RouteNames.logInScreen);
+}
 }

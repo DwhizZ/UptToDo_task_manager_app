@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo_app/src/globals/widgets/intro/intro_texts.dart';
+import 'package:uptodo_app/src/globals/widgets/intro_texts.dart';
 import '../components/onboard_buttons.dart';
 import '../components/page_app_bar.dart';
 

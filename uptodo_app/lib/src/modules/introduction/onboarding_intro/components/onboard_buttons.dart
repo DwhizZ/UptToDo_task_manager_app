@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uptodo_app/src/globals/providers/introduction_provider.dart';
 
 import 'custom_create_acct_button.dart';
-import 'custom_log_in_button.dart';
+import '../../../../globals/widgets/custom_log_in_button.dart';
 
 class OnboardButtons extends StatelessWidget {
   const OnboardButtons({
@@ -10,13 +12,14 @@ class OnboardButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(top: 370),
+    var provider = context.read<IntroductionProvider>();
+    return Padding(
+      padding: const EdgeInsets.only(top: 370),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CustomLogInButton(),
-          CustomCreateAcctButton(),
+          CustomLogInButton(buttonText: 'LOGIN', onPressed: provider.goToLogInScreen),
+          const CustomCreateAcctButton(),
         ],
       ),
     );

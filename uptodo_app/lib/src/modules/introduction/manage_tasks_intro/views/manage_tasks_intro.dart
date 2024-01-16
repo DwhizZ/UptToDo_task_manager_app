@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo_app/src/config/assets_paths.dart';
 import 'package:uptodo_app/src/globals/providers/introduction_provider.dart';
-import '../../../../globals/widgets/intro/back_and_next_button.dart';
-import '../../../../globals/widgets/intro/intro_image.dart';
-import '../../../../globals/widgets/intro/intro_texts.dart';
-import '../../../../globals/widgets/intro/skip_button.dart';
+import '../../../../globals/widgets/back_and_next_button.dart';
+import '../../../../globals/widgets/intro_image.dart';
+import '../../../../globals/widgets/intro_texts.dart';
+import '../../../../globals/widgets/skip_button.dart';
 
 class ManageTasksIntro extends StatelessWidget {
   const ManageTasksIntro({Key? key}) : super(key: key);

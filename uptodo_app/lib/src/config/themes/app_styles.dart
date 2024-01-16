@@ -1,16 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppStyles {
-  static const subHeaderStyle = TextStyle(
-    fontSize: 32,
-    fontFamily: 'Lato',
-  );
+  static TextStyle get subHeaderStyle => GoogleFonts.lato(
+        fontSize: 32,
+      );
 
-  static const bodyStyle = TextStyle(
-    fontSize: 16,
-    fontFamily: 'Lato',
-  );
-
- 
+  static TextStyle get bodyStyle => GoogleFonts.lato(
+        fontSize: 16,
+      );
 }
