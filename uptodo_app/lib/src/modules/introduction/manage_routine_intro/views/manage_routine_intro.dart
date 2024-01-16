@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo_app/src/config/assets_paths.dart';
 import 'package:uptodo_app/src/globals/providers/introduction_provider.dart';
-import 'package:uptodo_app/src/globals/widgets/back_and_next_button.dart';
-import 'package:uptodo_app/src/globals/widgets/intro_image.dart';
-import 'package:uptodo_app/src/globals/widgets/intro_texts.dart';
+import 'package:uptodo_app/src/globals/widgets/introduction/back_and_next_button.dart';
+import 'package:uptodo_app/src/globals/widgets/introduction/intro_image.dart';
+import 'package:uptodo_app/src/globals/widgets/introduction/intro_texts.dart';
 import 'package:uptodo_app/src/globals/widgets/skip_button.dart';
 
 class ManageRoutineIntro extends StatelessWidget {

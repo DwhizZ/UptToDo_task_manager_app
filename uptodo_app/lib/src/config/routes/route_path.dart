@@ -9,6 +9,7 @@ import 'package:uptodo_app/src/modules/introduction/onboarding_intro/views/onboa
 import 'package:uptodo_app/src/modules/introduction/organize_tasks_intro/views/organize_tasks_intro.dart';
 import 'package:uptodo_app/src/modules/onboarding/log_in_screen/provider/log_in_screen_provider.dart';
 import 'package:uptodo_app/src/modules/onboarding/log_in_screen/views/log_in_screen.dart';
+import 'package:uptodo_app/src/modules/onboarding/register_screen/views/register_screen.dart';
 
 class RoutePath {
   static final routes = <String, WidgetBuilder>{
@@ -30,5 +31,8 @@ class RoutePath {
     RouteNames.logInScreen: (_) => Provider(
         create: (context) => LogInScreenProvider(context),
         child: const LogInScreen()),
+    RouteNames.registerScreen: (_) => Provider(
+        create: (context) => LogInScreenProvider(context),
+        child: const RegisterScreen()),
   };
 }

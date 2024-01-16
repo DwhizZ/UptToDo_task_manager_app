@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../config/themes/app_styles.dart';
+import '../../../config/themes/app_styles.dart';
 
 class IntroText extends StatelessWidget {
   final String mainText;

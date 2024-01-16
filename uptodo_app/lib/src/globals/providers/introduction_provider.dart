@@ -45,4 +45,7 @@ class IntroductionProvider {
 void goToLogInScreen(){
   Navigator.pushNamed(context, RouteNames.logInScreen);
 }
+void goToRegisterScreen(){
+  Navigator.pushNamed(context, RouteNames.registerScreen);
+}
 }

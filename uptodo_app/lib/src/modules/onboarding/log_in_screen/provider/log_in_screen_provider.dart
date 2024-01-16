@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:uptodo_app/src/config/routes/route_names.dart';
 
 class LogInScreenProvider {
   LogInScreenProvider(this.context);
@@ -7,6 +7,8 @@ class LogInScreenProvider {
 
   var userNameController = TextEditingController();
   var passwordController = TextEditingController();
+  var password = TextEditingController();
+  var password2 = TextEditingController();
 
   String? userNameValidator(String? value) {
     if (value!.length <= 2 || value.isEmpty) {
@@ -22,6 +24,14 @@ class LogInScreenProvider {
     return null;
   }
 
+  String? passwordValidator2(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Password confirmation is required";
+    }
+    if (value != password.text) return "Passwords do not match";
+    return null;
+  }
+
   bool get areFieldsValid {
     return userNameValidator(userNameController.text) == null &&
         passwordValidator(passwordController.text) == null;
@@ -29,7 +39,6 @@ class LogInScreenProvider {
 
   void fieldValidate() {
     if (areFieldsValid) {
-      
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -37,5 +46,17 @@ class LogInScreenProvider {
         ),
       );
     }
+  }
+
+  void onArrow1pressed() {
+    Navigator.pushNamed(context, RouteNames.onboardingIntro);
+  }
+
+  void onArrow2pressed() {
+    Navigator.pushNamed(context, RouteNames.logInScreen);
+  }
+
+  void goToRegisterScreen() {
+    Navigator.pushNamed(context, RouteNames.registerScreen);
   }
 }

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:uptodo_app/src/globals/providers/introduction_provider.dart';
 
 import 'custom_create_acct_button.dart';
-import '../../../../globals/widgets/custom_log_in_button.dart';
+import '../../../../globals/widgets/onboarding/custom_log_in_button.dart';
 
 class OnboardButtons extends StatelessWidget {
   const OnboardButtons({
@@ -19,7 +19,7 @@ class OnboardButtons extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomLogInButton(buttonText: 'LOGIN', onPressed: provider.goToLogInScreen),
-          const CustomCreateAcctButton(),
+          CustomCreateAcctButton(onPressed: provider.goToRegisterScreen),
         ],
       ),
     );

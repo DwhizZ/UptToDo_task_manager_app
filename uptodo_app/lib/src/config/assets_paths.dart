@@ -7,4 +7,6 @@ class AssetsPaths {
   static const nav2 = 'assets/png/nav2.png';
   static const nav3 = 'assets/png/nav3.png';
   static const logInDivider = 'assets/png/login_divider.png';
+  static const appleIcon = 'assets/svg/apple.svg';
+  static const googleIcon = 'assets/svg/google.svg';
 }

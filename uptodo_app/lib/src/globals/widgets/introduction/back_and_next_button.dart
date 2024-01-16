@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../config/themes/app_colors.dart';
-import '../../config/themes/app_styles.dart';
+import '../../../config/themes/app_colors.dart';
+import '../../../config/themes/app_styles.dart';
 
 class BackAndNextButton extends StatelessWidget {
   final String textForButton;
