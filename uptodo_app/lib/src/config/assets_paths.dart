@@ -9,4 +9,7 @@ class AssetsPaths {
   static const logInDivider = 'assets/png/login_divider.png';
   static const appleIcon = 'assets/svg/apple.svg';
   static const googleIcon = 'assets/svg/google.svg';
+  static const profileAvatar = 'assets/png/profile_avatar.jpg';
+  static const taskChecklist = 'assets/png/task_checklist.png';
+  static const tripplebarMenu = 'assets/png/tripple_barmenu.png';
 }

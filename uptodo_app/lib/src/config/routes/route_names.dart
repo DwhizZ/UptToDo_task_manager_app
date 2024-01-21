@@ -6,4 +6,5 @@ abstract class RouteNames{
   static const onboardingIntro = '/onboardingIntro';
   static const logInScreen = '/logInScreen';
   static const registerScreen = '/registerScreen';
+  static const indexHome = '/indexHome';
 }

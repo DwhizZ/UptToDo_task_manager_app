@@ -36,7 +36,7 @@ class LogInFields extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 50),
-          child: CustomLogInButton(onPressed: () {}, buttonText: 'Login'),
+          child: CustomLogInButton(onPressed: provider.fieldValidate, buttonText: 'Login'),
         ),
         const OrDivider(),
         CustomElevatedButton(

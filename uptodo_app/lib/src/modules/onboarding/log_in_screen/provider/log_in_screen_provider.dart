@@ -39,6 +39,7 @@ class LogInScreenProvider {
 
   void fieldValidate() {
     if (areFieldsValid) {
+      Navigator.pushNamed(context, RouteNames.indexHome);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
