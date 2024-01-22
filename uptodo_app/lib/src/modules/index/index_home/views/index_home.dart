@@ -4,6 +4,8 @@ import 'package:uptodo_app/src/config/themes/app_colors.dart';
 import 'package:uptodo_app/src/config/themes/app_styles.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/show_calendar.dart';
 
+import 'components/add_task.dart';
+
 class IndexHome extends StatefulWidget {
   const IndexHome({Key? key}) : super(key: key);
 
@@ -98,7 +100,12 @@ class _IndexHomeState extends State<IndexHome> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            _pageController.jumpToPage(4);
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const TaskCreationDialog();
+              },
+            );
           },
 
           backgroundColor: AppColors.systemPurple,
