@@ -48,9 +48,7 @@ class _TaskCreationDialogState extends State<TaskCreationDialog> {
                   icon: const Icon(Icons.access_time),
                 ),
                 IconButton(
-                  onPressed: () {
-                    // Handle label icon action
-                  },
+                  onPressed: () {},
                   icon: const Icon(Icons.label),
                 ),
                 IconButton(

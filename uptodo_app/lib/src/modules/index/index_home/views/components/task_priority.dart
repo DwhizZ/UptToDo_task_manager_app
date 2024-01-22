@@ -18,7 +18,7 @@ class _TaskPriorityDialogState extends State<TaskPriorityDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            const Text(
               'Task Priority',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -28,7 +28,7 @@ class _TaskPriorityDialogState extends State<TaskPriorityDialog> {
             const SizedBox(height: 16.0),
             GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, // Changed to 4 for 4 items per row
+                crossAxisCount: 4, 
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
               ),
@@ -53,12 +53,11 @@ class _TaskPriorityDialogState extends State<TaskPriorityDialog> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // You can replace this icon with your flag icon
-                        Icon(Icons.flag),
+                        const Icon(Icons.flag),
                         const SizedBox(height: 8.0),
                         Text(
                           '$priority',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),

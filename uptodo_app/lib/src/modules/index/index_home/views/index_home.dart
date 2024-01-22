@@ -41,7 +41,7 @@ class _IndexHomeState extends State<IndexHome> {
             });
           },
           children: [
-            // Page 0 - Your main content
+            // Page 0 -
             SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.all(20),
