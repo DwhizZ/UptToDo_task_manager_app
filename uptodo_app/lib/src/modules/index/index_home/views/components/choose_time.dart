@@ -24,7 +24,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            const Text(
               'CHOOSE TIME',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
