@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uptodo_app/src/config/assets_paths.dart';
 import 'package:uptodo_app/src/config/themes/app_colors.dart';
 import 'package:uptodo_app/src/config/themes/app_styles.dart';
+import 'package:uptodo_app/src/modules/index/index_home/views/components/show_calendar.dart';
 
 class IndexHome extends StatefulWidget {
   const IndexHome({Key? key}) : super(key: key);
@@ -80,7 +81,7 @@ class _IndexHomeState extends State<IndexHome> {
             ),
 
             const Center(
-              child: Text('Calendar Page Content'),
+              child: CalendarPicker(),
             ),
 
             const Center(
