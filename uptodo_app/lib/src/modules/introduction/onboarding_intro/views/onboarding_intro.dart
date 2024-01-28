@@ -11,18 +11,17 @@ class OnboardingIntro extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: const PageAppBar(),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-            child: const Column(
-              children: [
-                IntroText(
-                    mainText: 'Welcome to UpTodo',
-                    extraText: 'Please login to your account or create \n'
-                        'new account to continue'),
-                OnboardButtons()
-              ],
-            ),
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          child: const Column(
+            children: [
+              IntroText(
+                  mainText: 'Welcome to UpTodo',
+                  extraText: 'Please login to your account or create \n'
+                      'new account to continue'),
+              Spacer(),
+              OnboardButtons()
+            ],
           ),
         ),
       ),
