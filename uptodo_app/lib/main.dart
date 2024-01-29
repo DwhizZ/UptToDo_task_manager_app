@@ -4,9 +4,17 @@ import 'package:uptodo_app/src/config/routes/route_names.dart';
 import 'package:uptodo_app/src/config/routes/route_path.dart';
 import 'package:uptodo_app/src/config/themes/app_theme.dart';
 import 'package:uptodo_app/src/globals/providers/introduction_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
+import 'firebase_options.dart';
 
+void main() async {
+// ...
 
-void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MainApp());
 }
 
@@ -20,7 +28,9 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => IntroductionProvider(context),
         ),
-        
+        ChangeNotifierProvider(
+          create: (context) => AuthenticationProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo_app/src/config/assets_paths.dart';
 import 'package:uptodo_app/src/config/themes/app_colors.dart';
 import 'package:uptodo_app/src/config/themes/app_styles.dart';
+import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/show_calendar.dart';
 
 import 'components/add_task.dart';
@@ -31,6 +33,7 @@ class _IndexHomeState extends State<IndexHome> {
 
   @override
   Widget build(BuildContext context) {
+    final data = context.watch<AuthenticationProvider>();
     return SafeArea(
       child: Scaffold(
         body: PageView(
@@ -70,7 +73,7 @@ class _IndexHomeState extends State<IndexHome> {
                       child: Image.asset(AssetsPaths.taskChecklist),
                     ),
                     Text(
-                      'What do you want to do today?\n',
+                      'What do you want to do today?\n ${data.userCredential?.user?.email}',
                       style: AppStyles.bodyStyle.copyWith(fontSize: 20),
                     ),
                     Text(
