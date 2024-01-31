@@ -8,4 +8,5 @@ abstract class RouteNames{
   static const logInScreen = '/logInScreen';
   static const registerScreen = '/registerScreen';
   static const indexHome = '/indexHome';
+  static const createCategory = '/createNewCategory';
 }

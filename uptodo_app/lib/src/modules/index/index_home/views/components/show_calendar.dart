@@ -5,10 +5,10 @@ import 'package:uptodo_app/src/config/themes/app_colors.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/choose_time.dart';
 
 class CalendarPicker extends StatefulWidget {
-  const CalendarPicker({Key? key}) : super(key: key);
-
+  const CalendarPicker({Key? key, required this.onTap}) : super(key: key);
+  final Function(DateTime value) onTap;
   @override
-  _CalendarPickerState createState() => _CalendarPickerState();
+  State<CalendarPicker> createState() => _CalendarPickerState();
 }
 
 class _CalendarPickerState extends State<CalendarPicker> {
@@ -78,7 +78,18 @@ class _CalendarPickerState extends State<CalendarPicker> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return const CustomTimePicker();
+                        return CustomTimePicker(
+                          onTap: (time) {
+                            var newDate = _selectedDate.copyWith(
+                              hour: time.hour,
+                              minute: time.minute,
+                            );
+
+                            widget.onTap(newDate);
+
+                            Navigator.pop(context);
+                          },
+                        );
                       },
                     );
                   },

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo_app/src/config/assets_paths.dart';
 import 'package:uptodo_app/src/config/routes/route_names.dart';
 import 'package:uptodo_app/src/globals/providers/validator.dart';
+import 'package:uptodo_app/src/globals/utilities/constants.dart';
 import 'package:uptodo_app/src/globals/widgets/onboarding/back_arrow_appbar.dart';
 import 'package:uptodo_app/src/globals/widgets/onboarding/custom_log_in_button.dart';
 import 'package:uptodo_app/src/globals/widgets/onboarding/onboard_header.dart';
@@ -11,6 +13,7 @@ import 'package:uptodo_app/src/modules/authentication/log_in_screen/components/c
 import 'package:uptodo_app/src/modules/authentication/log_in_screen/components/onboarding_options.dart';
 import 'package:uptodo_app/src/modules/authentication/log_in_screen/components/text_field_with_header.dart';
 import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
+import 'package:uptodo_app/src/modules/index/index_home/provider/category_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -74,30 +77,45 @@ class _RegisterScreenState extends State<RegisterScreen> with Validator {
                               context
                                   .read<AuthenticationProvider>()
                                   .emailSignUp(
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                      onError: (value) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            backgroundColor: Colors.redAccent,
-                                            content: Text(value),
-                                          ),
-                                        );
-                                      },
-                                      onSuccess: () async {
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    onError: (value) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          backgroundColor: Colors.redAccent,
+                                          content: Text(value),
+                                        ),
+                                      );
+                                    },
+                                    onSuccess: () async {
+                                      //Set default categories for this new users
+                                      try {
+                                        await context
+                                            .read<CategoryProvider>()
+                                            .setNewDefaultCategories();
+                                      } catch (e) {
+                                        logger.e(e.toString());
+                                      }
+
+                                      if (mounted) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
                                           content: Text(
                                               'Registration successful please check your email to verify your account'),
                                         ));
-                                        await Future.delayed(
-                                          const Duration(seconds: 2),
-                                        ).then((value) {
+                                      }
+
+                                      await Future.delayed(
+                                        const Duration(seconds: 2),
+                                      ).then(
+                                        (value) {
                                           Navigator.pushNamed(
                                               context, RouteNames.logInScreen);
-                                        });
-                                      });
+                                        },
+                                      );
+                                    },
+                                  );
                             }
                           },
                           buttonText: 'Register'),

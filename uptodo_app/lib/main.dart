@@ -6,6 +6,8 @@ import 'package:uptodo_app/src/config/themes/app_theme.dart';
 import 'package:uptodo_app/src/globals/providers/introduction_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
+import 'package:uptodo_app/src/modules/index/index_home/provider/category_provider.dart';
+import 'package:uptodo_app/src/modules/index/index_home/provider/todo_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -31,6 +33,12 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthenticationProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => CategoryProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TodoProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

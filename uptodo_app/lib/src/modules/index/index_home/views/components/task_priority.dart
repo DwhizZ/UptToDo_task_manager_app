@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:uptodo_app/src/globals/utilities/constants.dart';
 
 class TaskPriorityDialog extends StatefulWidget {
-  const TaskPriorityDialog({Key? key}) : super(key: key);
-
+  const TaskPriorityDialog({Key? key, required this.onTap}) : super(key: key);
+  final Function(int value) onTap;
   @override
-  _TaskPriorityDialogState createState() => _TaskPriorityDialogState();
+  State<TaskPriorityDialog> createState() => _TaskPriorityDialogState();
 }
 
 class _TaskPriorityDialogState extends State<TaskPriorityDialog> {
@@ -28,7 +29,7 @@ class _TaskPriorityDialogState extends State<TaskPriorityDialog> {
             const SizedBox(height: 16.0),
             GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, 
+                crossAxisCount: 4,
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
               ),
@@ -81,10 +82,12 @@ class _TaskPriorityDialogState extends State<TaskPriorityDialog> {
                 ElevatedButton(
                   onPressed: () {
                     if (_selectedPriority != null) {
-                      print('Selected Priority: $_selectedPriority');
+                      logger.d('Selected Priority: $_selectedPriority');
+                      widget.onTap(_selectedPriority!);
                       Navigator.pop(context); // Close the dialog after saving
                     } else {
-                      print('Please select a priority');
+                      logger.d('No Priority Selected');
+                      Navigator.pop(context);
                     }
                   },
                   child: const Text('Save'),

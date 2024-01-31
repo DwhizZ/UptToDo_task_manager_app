@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo_app/src/config/assets_paths.dart';
 import 'package:uptodo_app/src/config/routes/route_names.dart';
 import 'package:uptodo_app/src/globals/widgets/introduction/back_and_next_button.dart';
 import 'package:uptodo_app/src/globals/widgets/introduction/intro_image.dart';
 import 'package:uptodo_app/src/globals/widgets/introduction/intro_texts.dart';
 import 'package:uptodo_app/src/globals/widgets/skip_button.dart';
+import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -72,10 +74,15 @@ class _IntroPageState extends State<IntroPage> {
             const Spacer(),
             BackAndNextButton(
                 textForButton: 'NEXT',
-                onNextButtonPressed: () {
+                onNextButtonPressed: () async {
                   if (_pageController.page == 2) {
-                    Navigator.of(context)
-                        .pushReplacementNamed(RouteNames.onboardingIntro);
+                    await context
+                        .read<AuthenticationProvider>()
+                        .setDoneOnboardingFlow();
+                    if (mounted) {
+                      Navigator.of(context)
+                          .pushReplacementNamed(RouteNames.onboardingIntro);
+                    }
                   }
                   _pageController.nextPage(
                       duration: const Duration(milliseconds: 300),

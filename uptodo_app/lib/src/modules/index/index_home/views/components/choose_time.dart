@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomTimePicker extends StatefulWidget {
-  const CustomTimePicker({Key? key}) : super(key: key);
-
+  const CustomTimePicker({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
+  final Function(TimeOfDay value) onTap;
   @override
-  _CustomTimePickerState createState() => _CustomTimePickerState();
+  State<CustomTimePicker> createState() => _CustomTimePickerState();
 }
 
 class _CustomTimePickerState extends State<CustomTimePicker> {
@@ -49,8 +52,8 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
                     }
                   },
                   child: Text(
-                    '${_selectedTime.format(context)}',
-                    style: TextStyle(color: Colors.white),
+                    _selectedTime.format(context),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ],
@@ -69,6 +72,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
                   onPressed: () {
                     // Add your code for saving the selected time
                     // _selectedTime contains the selected time
+                    widget.onTap(_selectedTime);
                     Navigator.pop(context); // Close the dialog after saving
                   },
                   child: const Text('Save'),

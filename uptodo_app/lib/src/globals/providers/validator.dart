@@ -1,4 +1,11 @@
 mixin Validator {
+
+  String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter some text';
+    }
+    return null;
+  }
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter some text';

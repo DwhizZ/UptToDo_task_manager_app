@@ -1,12 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:uptodo_app/src/globals/local_storage/local_storage.dart';
+import 'package:uptodo_app/src/globals/utilities/constants.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   final _fireAuth = FirebaseAuth.instance;
   bool _isLoading = false;
 
   UserCredential? userCredential;
+
+  User? get user => _fireAuth.currentUser;
 
   bool get isLoading => _isLoading;
 
@@ -42,6 +47,59 @@ class AuthenticationProvider extends ChangeNotifier {
     }
 
     setIsLoading(false);
+  }
+
+  Future<bool> hasDoneOnboardingFlow() async {
+    return await LocalStorage.readBool(ONBOARDING) ?? false;
+  }
+
+  Future<void> setDoneOnboardingFlow() async {
+    await LocalStorage.write(ONBOARDING, true);
+  }
+
+  Future<void> resetDoneOnboardingFlow() async {
+    await LocalStorage.write(ONBOARDING, false);
+  }
+
+  Future<bool> biometricAuth() async {
+    final LocalAuthentication auth = LocalAuthentication();
+
+    final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
+    if (canAuthenticateWithBiometrics) {
+      try {
+        final bool didAuthenticate = await auth.authenticate(
+          localizedReason: 'Please authenticate to automatically log in',
+        );
+        if (didAuthenticate) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (e) {
+        //Because Emulatore doesn't have biometrics
+        if (kDebugMode) {
+          return true;
+        }
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  //if firebase knows the user we call on biometric auth to log the user in
+  Future<bool> isAuthenticated() async {
+    bool userIsFire = _fireAuth.currentUser != null;
+
+    if (userIsFire) {
+      return await biometricAuth();
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> signOut() async {
+    await _fireAuth.signOut();
   }
 
   Future<void> signInWithGoogle({
@@ -96,6 +154,7 @@ class AuthenticationProvider extends ChangeNotifier {
       //check if user is verfied
       if (userCredential!.user!.emailVerified) {
         onSuccess();
+        //Todo: create a unique clist of all categories for that user .
       } else {
         onError("Please verify your email. We have sent you an email");
       }
