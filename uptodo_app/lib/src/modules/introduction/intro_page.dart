@@ -27,7 +27,15 @@ class _IntroPageState extends State<IntroPage> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
-            SkipButton(onSkipPressed: () {}),
+            SkipButton(onSkipPressed: () async {
+              await context
+                  .read<AuthenticationProvider>()
+                  .setDoneOnboardingFlow();
+              if (mounted) {
+                Navigator.of(context)
+                    .pushReplacementNamed(RouteNames.onboardingIntro);
+              }
+            }),
             SizedBox(
               height: size.height * 0.8,
               child: PageView(

@@ -9,4 +9,5 @@ abstract class RouteNames{
   static const registerScreen = '/registerScreen';
   static const indexHome = '/indexHome';
   static const createCategory = '/createNewCategory';
+  static const editTodoPage = '/editTodoPage';
 }

@@ -5,6 +5,8 @@ import 'package:uptodo_app/src/config/themes/app_colors.dart';
 import 'package:uptodo_app/src/config/themes/app_styles.dart';
 import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
 import 'package:uptodo_app/src/modules/index/index_home/provider/todo_provider.dart';
+import 'package:uptodo_app/src/modules/index/index_home/views/components/calender_view.dart';
+import 'package:uptodo_app/src/modules/index/index_home/views/components/profile_view.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/show_calendar.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/todo_tile.dart';
 
@@ -14,7 +16,7 @@ class IndexHome extends StatefulWidget {
   const IndexHome({Key? key}) : super(key: key);
 
   @override
-  _IndexHomeState createState() => _IndexHomeState();
+  State<IndexHome> createState() => _IndexHomeState();
 }
 
 class _IndexHomeState extends State<IndexHome> {
@@ -103,11 +105,31 @@ class _IndexHomeState extends State<IndexHome> {
                         style: AppStyles.bodyStyle,
                       ),
                     ] else ...[
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.search,
+                            size: 32,
+                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Search',
+                        ),
+                        onChanged: (text) {
+                          final todoProvider = context.read<TodoProvider>();
+                          todoProvider.search(text);
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       ListView.builder(
-                          itemCount: todoProvider.todos.length,
+                          itemCount: todoProvider.filteredTodos.length,
                           shrinkWrap: true,
                           itemBuilder: (context, idx) {
-                            final todo = todoProvider.todos[idx];
+                            final todo = todoProvider.filteredTodos[idx];
                             return TodoTile(todo: todo);
                           }),
                     ],
@@ -116,19 +138,12 @@ class _IndexHomeState extends State<IndexHome> {
               );
             }),
 
-            Center(
-              child: CalendarPicker(
-                onTap: (vale) {},
-              ),
-            ),
+            const CalenderView(),
 
             const Center(
               child: Text('Focus Page Content'),
             ),
-
-            const Center(
-              child: Text('Profile Page Content'),
-            ),
+            const ProfileView(),
             const Center(
               child: Text('Add task Page Content'),
             ),
@@ -151,12 +166,6 @@ class _IndexHomeState extends State<IndexHome> {
                   },
                 );
               });
-          // showDialog(
-          //   context: context,
-          //   builder: (BuildContext context) {
-          //     return const TaskCreationDialog();
-          //   },
-          // );
         },
 
         backgroundColor: AppColors.systemPurple,

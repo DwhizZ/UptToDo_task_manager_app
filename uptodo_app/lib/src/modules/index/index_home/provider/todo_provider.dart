@@ -12,6 +12,22 @@ class TodoProvider extends ChangeNotifier {
   List<Todo> _todos = [];
   List<Todo> get todos => _todos;
 
+  List<Todo> _filteredTodos = [];
+
+  List<Todo> get filteredTodos => _filteredTodos;
+
+  void search(String text) {
+    if (text.isEmpty) {
+      _filteredTodos = _todos;
+    } else {
+      _filteredTodos = _todos
+          .where((element) =>
+              element.title.toLowerCase().contains(text.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
+  }
+
   void setIsLoading(bool value) {
     _isLoading = value;
     notifyListeners();
@@ -32,6 +48,7 @@ class TodoProvider extends ChangeNotifier {
 
       setIsLoading(false);
       onSuncess();
+      getAllTodos(() {}, () {});
     } catch (e) {
       setIsLoading(false);
       onError(e.toString());
@@ -56,11 +73,63 @@ class TodoProvider extends ChangeNotifier {
           .toList();
 
       _todos = todos;
+      search("");
       onSucess();
       setIsLoading(false);
     } catch (e) {
       onError(e.toString());
     } finally {
+      setIsLoading(false);
+    }
+  }
+
+  //Delete a todo
+  Future<void> deleteTodo({
+    required String id,
+    required Function onError,
+    required Function onSucess,
+  }) async {
+    //loading
+    setIsLoading(true);
+    try {
+      await _db
+          .collection("Users")
+          .doc(_user.uid)
+          .collection("Todos")
+          .doc(id)
+          .delete();
+
+      getAllTodos(() {}, () {});
+      onSucess();
+    } catch (e) {
+      onError("Error could not delete $e ");
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // Update a todo
+  Future<void> updateTodo({
+    required Todo todo,
+    required Function onError,
+    required Function onSucess,
+  }) async {
+    //loading
+    setIsLoading(true);
+    try {
+      await _db
+          .collection("Users")
+          .doc(_user.uid)
+          .collection("Todos")
+          .doc(todo.id)
+          .update(todo.toJson());
+
+      onSucess();
+      getAllTodos(() {}, () {});
+      setIsLoading(false);
+    } catch (e) {
+      onError(e.toString());
       setIsLoading(false);
     }
   }

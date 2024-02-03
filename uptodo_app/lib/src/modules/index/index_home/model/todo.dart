@@ -7,6 +7,7 @@ class Todo {
   final DateTime dateTime;
   final int priority;
   final TodoCategory category;
+  final bool isDone;
 
   Todo({
     this.id,
@@ -15,6 +16,7 @@ class Todo {
     required this.dateTime,
     required this.priority,
     required this.category,
+    required this.isDone,
   });
 
   factory Todo.fromJson(Map<String, dynamic> json, {String? id}) {
@@ -25,6 +27,7 @@ class Todo {
       dateTime: DateTime.parse(json['dateTime']),
       priority: json['priority'],
       category: TodoCategory.fromJson(json['category']),
+      isDone: json['isDone'],
     );
   }
 
@@ -35,6 +38,7 @@ class Todo {
       'dateTime': dateTime.toIso8601String(),
       'priority': priority,
       'category': category.toJson(),
+      'isDone': isDone,
     };
   }
 }

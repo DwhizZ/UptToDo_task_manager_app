@@ -169,6 +169,7 @@ class _TaskCreationSheetState extends State<TaskCreationSheet> with Validator {
                                 dateTime: _selectedDate!,
                                 priority: _selectedPriority!,
                                 category: _selectedCategory!,
+                                isDone: false,
                               );
                               await todoProvider.addTodo(
                                   todo: todo,
