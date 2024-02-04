@@ -31,9 +31,12 @@ class TodoTile extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Padding(
-                    padding: EdgeInsets.only(top: 10, left: 10, right: 10.0),
-                    child: Icon(Icons.circle_outlined)),
+                Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10, left: 10, right: 10.0),
+                    child: todo.isDone
+                        ? const Icon(Icons.circle)
+                        : const Icon(Icons.circle_outlined)),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(todo.title),

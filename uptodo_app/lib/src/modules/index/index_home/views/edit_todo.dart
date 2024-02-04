@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:uptodo_app/src/config/themes/app_colors.dart';
 import 'package:uptodo_app/src/globals/providers/validator.dart';
 import 'package:uptodo_app/src/globals/utilities/utilities.dart';
 import 'package:uptodo_app/src/globals/widgets/custom_button.dart';
@@ -26,6 +25,7 @@ class _EditTodoPageState extends State<EditTodoPage> with Validator {
   TextEditingController descriptionController = TextEditingController();
   TodoCategory? _selectedCategory;
   int? _selectedPriority;
+  bool? _isDone;
   DateTime? _selectedDate;
   String formattedDate = '';
   Todo? todo;
@@ -44,6 +44,7 @@ class _EditTodoPageState extends State<EditTodoPage> with Validator {
     descriptionController.text = todo!.description;
     _selectedPriority = todo!.priority;
     _selectedDate = todo!.dateTime;
+    _isDone = todo!.isDone;
 
     setState(() {});
   }
@@ -92,7 +93,16 @@ class _EditTodoPageState extends State<EditTodoPage> with Validator {
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.circle_outlined),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            _isDone = !_isDone!;
+                          });
+                        },
+                        child: _isDone == true
+                            ? const Icon(Icons.circle)
+                            : const Icon(Icons.circle_outlined),
+                      ),
                       const SizedBox(
                         width: 21,
                       ),
@@ -331,7 +341,7 @@ class _EditTodoPageState extends State<EditTodoPage> with Validator {
                                   dateTime: _selectedDate!,
                                   category: _selectedCategory!,
                                   priority: _selectedPriority!,
-                                  isDone: todo!.isDone,
+                                  isDone: _isDone ?? false,
                                   id: todo!.id,
                                 );
 
