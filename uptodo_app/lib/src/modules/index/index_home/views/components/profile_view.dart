@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
+import 'package:uptodo_app/src/modules/index/index_home/provider/todo_provider.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -8,6 +9,11 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = context.watch<AuthenticationProvider>().user!;
+    final todoProvider = context.watch<TodoProvider>();
+    final completedTask = todoProvider.todos.where((e) => e.isDone).length;
+    final unCompletedTask =
+        todoProvider.todos.where((e) => e.isDone == false).length;
+
     return Column(
       children: [
         const Center(
@@ -49,7 +55,7 @@ class ProfileView extends StatelessWidget {
                   color: const Color(0xFF363636),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: const Center(child: Text("Task left")),
+                child: Center(child: Text("Task left $unCompletedTask")),
               ),
               const Spacer(),
               Container(
@@ -59,7 +65,7 @@ class ProfileView extends StatelessWidget {
                   color: const Color(0xFF363636),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: const Center(child: Text("Task done")),
+                child: Center(child: Text("Task done $completedTask")),
               ),
             ],
           ),
