@@ -64,7 +64,12 @@ class _LogInScreenState extends State<LogInScreen> with Validator {
                             child: Center(child: CircularProgressIndicator()),
                           )
                         : CustomLogInButton(
+                            //Todo How to call a provider
                             onPressed: () {
+                              //context.read<AuthenticationProvider>().logout();
+                              //Nig
+                              // Navigator.pushReplacementNamed(context, RouteNames.loginScreen);
+
                               context.read<AuthenticationProvider>().login(
                                     email: emailController.text,
                                     password: passwordController.text,

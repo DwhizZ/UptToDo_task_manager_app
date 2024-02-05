@@ -166,9 +166,10 @@ class AuthenticationProvider extends ChangeNotifier {
     }
     setIsLoading(false);
   }
+
+  void logout() {
+  FirebaseAuth.instance.signOut();
+}
 }
 
-void logout() {
-  FirebaseAuth.instance.signOut();
-  // Navigator.pushReplacementNamed(context, RouteNames.loginScreen);
-}
+
