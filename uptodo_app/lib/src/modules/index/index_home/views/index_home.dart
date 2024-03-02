@@ -7,7 +7,6 @@ import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dar
 import 'package:uptodo_app/src/modules/index/index_home/provider/todo_provider.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/calender_view.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/profile_view.dart';
-import 'package:uptodo_app/src/modules/index/index_home/views/components/show_calendar.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/components/todo_tile.dart';
 
 import 'components/add_task.dart';
@@ -70,7 +69,9 @@ class _IndexHomeState extends State<IndexHome> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _pageController.jumpToPage(4);
+                          },
                           icon: const Icon(Icons.menu),
                         ),
                         Text(
@@ -144,9 +145,6 @@ class _IndexHomeState extends State<IndexHome> {
               child: Text('Focus Page Content'),
             ),
             const ProfileView(),
-            const Center(
-              child: Text('Add task Page Content'),
-            ),
           ],
         ),
       ),

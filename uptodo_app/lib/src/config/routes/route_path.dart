@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uptodo_app/src/config/routes/route_names.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/edit_todo.dart';
 import 'package:uptodo_app/src/modules/index/index_home/views/index_home.dart';
+import 'package:uptodo_app/src/modules/index/index_home/views/settings_page.dart';
 import 'package:uptodo_app/src/modules/introduction/intro_page.dart';
 import 'package:uptodo_app/src/modules/introduction/logo_page/views/logo_page.dart';
 import 'package:uptodo_app/src/modules/introduction/onboarding_intro/views/onboarding_intro.dart';
@@ -17,5 +18,6 @@ class RoutePath {
     RouteNames.registerScreen: (_) => const RegisterScreen(),
     RouteNames.indexHome: (_) => const IndexHome(),
     RouteNames.editTodoPage: (_) => const EditTodoPage(),
+    RouteNames.settingsPage: (_) => const SettingsPage(),
   };
 }

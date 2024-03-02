@@ -10,4 +10,5 @@ abstract class RouteNames{
   static const indexHome = '/indexHome';
   static const createCategory = '/createNewCategory';
   static const editTodoPage = '/editTodoPage';
+  static const settingsPage = '/settings';
 }

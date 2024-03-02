@@ -77,9 +77,10 @@ class AuthenticationProvider extends ChangeNotifier {
         }
       } catch (e) {
         //Because Emulatore doesn't have biometrics
-        if (kDebugMode) {
-          return true;
-        }
+        // if (kDebugMode) {
+        //   return true;
+        // }
+        print(e.toString());
         return false;
       }
     } else {
@@ -134,6 +135,8 @@ class AuthenticationProvider extends ChangeNotifier {
       if (kDebugMode) {
         print(e);
       }
+    } catch (e) {
+      setIsLoading(false);
     }
     setIsLoading(false);
   }
@@ -168,8 +171,6 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   void logout() {
-  FirebaseAuth.instance.signOut();
+    FirebaseAuth.instance.signOut();
+  }
 }
-}
-
-

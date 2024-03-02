@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uptodo_app/src/config/routes/route_names.dart';
 import 'package:uptodo_app/src/modules/authentication/provider/auth_provider.dart';
 import 'package:uptodo_app/src/modules/index/index_home/provider/todo_provider.dart';
 
@@ -73,41 +74,71 @@ class ProfileView extends StatelessWidget {
         const SizedBox(
           height: 15.0,
         ),
-        _profileTiles(Icons.person_outline, "Profile"),
+        _profileTiles(Icons.person_outline, "Profile", () {}),
         const SizedBox(
           height: 15.0,
         ),
-        _profileTiles(Icons.settings_outlined, "Settings"),
+        _profileTiles(Icons.settings_outlined, "Settings", () {
+          // go to settings
+          Navigator.pushNamed(context, RouteNames.settingsPage);
+        }),
         const SizedBox(
           height: 15.0,
         ),
-        _profileTiles(Icons.logout, "Logout"),
+        InkWell(
+          onTap: () {
+            context.watch<AuthenticationProvider>().logout();
+            Navigator.pushNamed(context, RouteNames.logInScreen);
+          },
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.logout,
+                  size: 37.0,
+                  color: Colors.red,
+                ),
+                SizedBox(
+                  width: 20.0,
+                ),
+                Text(
+                  "Logout",
+                  style: TextStyle(fontSize: 16.0, color: Colors.red),
+                ),
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
 
-  Widget _profileTiles(IconData icon, String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            size: 37.0,
-          ),
-          const SizedBox(
-            width: 20.0,
-          ),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 16.0),
-          ),
-          const Spacer(),
-          const Icon(
-            Icons.chevron_right,
-            size: 24,
-          )
-        ],
+  Widget _profileTiles(IconData icon, String title, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 37.0,
+            ),
+            const SizedBox(
+              width: 20.0,
+            ),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16.0),
+            ),
+            const Spacer(),
+            const Icon(
+              Icons.chevron_right,
+              size: 24,
+            )
+          ],
+        ),
       ),
     );
   }
